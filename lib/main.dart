@@ -1,11 +1,16 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'asroo_store_app.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'core/app/env.varrables.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EnvVairables.instance.init(envType: EnvTypeEnum.prod);
+
   Platform.isAndroid
       ? await Firebase.initializeApp(
           options: const FirebaseOptions(
@@ -14,5 +19,13 @@ void main() async {
               messagingSenderId: '595873217522',
               projectId: 'appstore-37b7c'))
       : Firebase.initializeApp();
-  runApp(const AsrooStoreApp());
+  await SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+  
+    ],
+  ).then((_) {
+    runApp(const AsrooStoreApp());
+  });
 }
