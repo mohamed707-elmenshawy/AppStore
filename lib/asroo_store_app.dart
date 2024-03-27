@@ -1,3 +1,4 @@
+import 'package:asroo_store_app/core/app/env.varrables.dart';
 import 'package:flutter/material.dart';
 
 class AsrooStoreApp extends StatelessWidget {
@@ -7,6 +8,7 @@ class AsrooStoreApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: EnvVairables.instance.debugMode,
       title: 'Flutter Demo',
       theme: ThemeData(),
       home: Scaffold(
